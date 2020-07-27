@@ -18,7 +18,8 @@ void main() async {
     proxyHost = httpProxy.host;
     proxyPort = httpProxy.port;
 
-    HttpOverrides.runWithHttpOverrides(() => runApp(MyApp()), httpProxy);
+    HttpOverrides.global=httpProxy;
+    runApp(MyApp());
   }
 }
 
