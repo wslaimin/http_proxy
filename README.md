@@ -8,17 +8,10 @@ You should initialize before runapp().
 
 ```
 void main() async {
-  if (kReleaseMode) {
-    runApp(MyApp());
-  } else {
-    WidgetsFlutterBinding.ensureInitialized();
-    HttpProxy httpProxy = await HttpProxy.createHttpProxy();
-
-    proxyHost = httpProxy.host;
-    proxyPort = httpProxy.port;
-
-    HttpOverrides.runWithHttpOverrides(() => runApp(MyApp()), httpProxy);
-  }
+  WidgetsFlutterBinding.ensureInitialized();
+  HttpProxy httpProxy = await HttpProxy.createHttpProxy();
+  HttpOverrides.global=httpProxy;
+  runApp(MyApp());
 }
 ```
 
