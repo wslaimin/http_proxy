@@ -5,13 +5,13 @@ homepage: https://github.com/wslaimin
 repository: https://github.com/wslaimin/http_proxy
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.10.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.12.1
+  http: ^0.13.1
 
 dev_dependencies:
   flutter_test:
