@@ -22,7 +22,7 @@ class HttpProxy extends HttpOverrides {
   }
 
   @override
-  HttpClient createHttpClient(SecurityContext context) {
+  HttpClient createHttpClient(SecurityContext? context) {
     var client = super.createHttpClient(context);
     client.badCertificateCallback =
         (X509Certificate cert, String host, int port) {
@@ -32,7 +32,7 @@ class HttpProxy extends HttpOverrides {
   }
 
   @override
-  String findProxyFromEnvironment(Uri url, Map<String, String> environment) {
+  String findProxyFromEnvironment(Uri url, Map<String, String>? environment) {
     if (host == null) {
       return super.findProxyFromEnvironment(url, environment);
     }
