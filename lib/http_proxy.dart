@@ -3,17 +3,17 @@ import 'package:flutter/services.dart';
 
 MethodChannel _channel = MethodChannel('com.lm.http.proxy');
 
-Future<String> _getProxyHost() async {
+Future<String?> _getProxyHost() async {
   return await _channel.invokeMethod('getProxyHost');
 }
 
-Future<String> _getProxyPort() async {
+Future<String?> _getProxyPort() async {
   return await _channel.invokeMethod('getProxyPort');
 }
 
 class HttpProxy extends HttpOverrides {
-  String host;
-  String port;
+  String? host;
+  String? port;
 
   HttpProxy._(this.host, this.port);
 
@@ -22,7 +22,7 @@ class HttpProxy extends HttpOverrides {
   }
 
   @override
-  HttpClient createHttpClient(SecurityContext context) {
+  HttpClient createHttpClient(SecurityContext? context) {
     var client = super.createHttpClient(context);
     client.badCertificateCallback =
         (X509Certificate cert, String host, int port) {
@@ -32,7 +32,7 @@ class HttpProxy extends HttpOverrides {
   }
 
   @override
-  String findProxyFromEnvironment(Uri url, Map<String, String> environment) {
+  String findProxyFromEnvironment(Uri url, Map<String, String>? environment) {
     if (host == null) {
       return super.findProxyFromEnvironment(url, environment);
     }
