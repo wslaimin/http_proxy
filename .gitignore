@@ -5,3 +5,10 @@
 .pub/
 
 build/
+.idea
+.idea/.gitignore
+.idea/http_proxy.iml
+.idea/libraries/
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
