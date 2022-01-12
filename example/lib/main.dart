@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _future = get(url);
+    _future = get(Uri.parse(url));
   }
 
   @override
@@ -70,14 +70,14 @@ class _MyAppState extends State<MyApp> {
             ),
             Expanded(
               child: Center(
-                child: FutureBuilder(
+                child: FutureBuilder<Response>(
                   future: _future,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Text(
-                          snapshot.data.body.toString(),
+                          snapshot.data?.body.toString() ?? 'null',
                         ),
                       );
                     }
