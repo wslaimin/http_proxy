@@ -1,6 +1,6 @@
 name: http_proxy
 description: http proxy plugin,get and set http proxy automatically.This package help you to use proxy tools.
-version: 1.2.0
+version: 1.2.1
 homepage: https://github.com/wslaimin
 repository: https://github.com/wslaimin/http_proxy
 

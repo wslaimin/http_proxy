@@ -15,3 +15,7 @@
 ## 1.2.0
 
 * Opt into null safety
+
+## 1.2.1
+
+* Update README
