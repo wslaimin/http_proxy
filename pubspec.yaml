@@ -1,6 +1,6 @@
 name: http_proxy
 description: http proxy plugin,get and set http proxy automatically.This package help you to use proxy tools.
-version: 1.2.1
+version: 1.2.2
 homepage: https://github.com/wslaimin
 repository: https://github.com/wslaimin/http_proxy
 
@@ -11,7 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:

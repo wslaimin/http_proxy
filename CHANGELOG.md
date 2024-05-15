@@ -19,3 +19,6 @@
 ## 1.2.1
 
 * Update README
+
+## 1.2.2
+* Remove dependency on http plugin
