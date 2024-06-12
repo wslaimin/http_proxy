@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'package:flutter_user_certificates_android/flutter_user_certificates_android.dart';
 
 MethodChannel _channel = MethodChannel('com.lm.http.proxy');
 
@@ -14,21 +15,34 @@ Future<String?> _getProxyPort() async {
 class HttpProxy extends HttpOverrides {
   String? host;
   String? port;
+  Map<String, DERCertificate>? certs = {};
 
-  HttpProxy._(this.host, this.port);
+  HttpProxy._(this.host, this.port, {this.certs});
 
   static Future<HttpProxy> createHttpProxy() async {
-    return HttpProxy._(await _getProxyHost(), await _getProxyPort());
+    Map<String, DERCertificate>? certs;
+    if (Platform.isAndroid) {
+      certs = await FlutterUserCertificatesAndroid().getUserCertificates();
+    }
+
+    return HttpProxy._(await _getProxyHost(), await _getProxyPort(),
+        certs: certs);
   }
 
   @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    var client = super.createHttpClient(context);
-    client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) {
-      return true;
-    };
-    return client;
+  HttpClient createHttpClient(SecurityContext? passedContext) {
+    var context = passedContext;
+
+    if (Platform.isAndroid) {
+      if (certs != null) {
+        context ??= SecurityContext.defaultContext;
+        for (DERCertificate cert in certs!.values) {
+          context.setTrustedCertificatesBytes(cert.toPEM().bytes);
+        }
+      }
+    }
+
+    return super.createHttpClient(context);
   }
 
   @override
@@ -44,9 +58,6 @@ class HttpProxy extends HttpOverrides {
     if (port != null) {
       environment['http_proxy'] = '$host:$port';
       environment['https_proxy'] = '$host:$port';
-    } else {
-      environment['http_proxy'] = '$host:8888';
-      environment['https_proxy'] = '$host:8888';
     }
 
     return super.findProxyFromEnvironment(url, environment);
