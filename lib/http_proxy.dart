@@ -20,7 +20,6 @@ class HttpProxy extends HttpOverrides {
   HttpProxy._(this.host, this.port, {this.certs});
 
   static Future<HttpProxy> createHttpProxy() async {
-    print('Creating HttpProxy');
     Map<String, DERCertificate>? certs;
     if (Platform.isAndroid) {
       certs = await FlutterUserCertificatesAndroid().getUserCertificates();
