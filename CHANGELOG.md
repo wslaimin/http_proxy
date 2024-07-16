@@ -22,3 +22,6 @@
 
 ## 1.2.2
 * Remove dependency on http plugin
+
+## 1.2.3
+* Add Android namespace
