@@ -69,6 +69,7 @@ target 'Runner' do
   system('mkdir -p .symlinks/plugins')
   plugin_pods = parse_KV_file('../.flutter-plugins')
   plugin_pods.each do |name, path|
+    next if name == 'flutter_user_certificates_android'
     symlink = File.join('.symlinks', 'plugins', name)
     File.symlink(path, symlink)
     pod name, :path => File.join(symlink, 'ios')

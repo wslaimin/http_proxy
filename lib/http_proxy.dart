@@ -1,16 +1,8 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter_user_certificates_android/flutter_user_certificates_android.dart';
-
-MethodChannel _channel = MethodChannel('com.lm.http.proxy');
-
-Future<String?> _getProxyHost() async {
-  return await _channel.invokeMethod('getProxyHost');
-}
-
-Future<String?> _getProxyPort() async {
-  return await _channel.invokeMethod('getProxyPort');
-}
+import 'package:http_proxy/http_proxy_platform_interface.dart'
+    show HttpProxyPlatform;
 
 class HttpProxy extends HttpOverrides {
   String? host;
@@ -25,7 +17,8 @@ class HttpProxy extends HttpOverrides {
       certs = await FlutterUserCertificatesAndroid().getUserCertificates();
     }
 
-    return HttpProxy._(await _getProxyHost(), await _getProxyPort(),
+    return HttpProxy._(await HttpProxyPlatform.instance.getProxyHost(),
+        await HttpProxyPlatform.instance.getProxyPort(),
         certs: certs);
   }
 
