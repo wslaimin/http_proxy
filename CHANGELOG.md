@@ -22,3 +22,7 @@
 
 ## 1.2.2
 * Remove dependency on http plugin
+
+## 1.2.3
+* Trust ceritifications on Android
+* Set namespace for gradle building

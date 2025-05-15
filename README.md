@@ -16,5 +16,3 @@ void main() async {
 ```
 
 That's all done.You can use Charles or other proxy tools now.
-
-⚠️ Plugin ignores all CA checks because http library does't use platform CA store.The suggestion that the plugin is available only in dev environment is security for https requests.

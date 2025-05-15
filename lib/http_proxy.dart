@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/services.dart';
 import 'package:flutter_user_certificates_android/flutter_user_certificates_android.dart';
 import 'package:http_proxy/http_proxy_platform_interface.dart'
     show HttpProxyPlatform;
